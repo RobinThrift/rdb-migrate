@@ -4,10 +4,17 @@ var yaml    = require('js-yaml'),
 
 'use strict';
 
-try {
-    var spec = yaml.safeLoad(fs.readFileSync('test/fixtures/testdb.yaml', 'utf8'));
-} catch (e) {
-    throw new Error('Invalud YAML, or file not found');
-}
 
-runtime.run(spec);
+process.argv.forEach(function(file, index) {
+    if (index < 2) {
+        return;
+    }
+
+    try {
+        var spec = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+    } catch (e) {
+        throw new Error('Invalud YAML, or file not found');
+    }
+
+    runtime.run(spec);
+});
