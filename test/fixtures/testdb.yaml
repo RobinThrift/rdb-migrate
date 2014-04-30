@@ -1,0 +1,15 @@
+---
+config:
+    host: localhost
+    port: 28015
+
+dbs:
+    dev: !!map
+        users: !!map
+            primaryKey: id
+            durability: hard
+
+        comments: !!map
+            primaryKey: id
+            indices:
+                - users.id
